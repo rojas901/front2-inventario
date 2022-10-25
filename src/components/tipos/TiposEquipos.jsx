@@ -1,8 +1,11 @@
 import React from 'react';
+import ContainerPage from '../ui/ContainerPage';
 
 const TiposEquipos = () => {
   return (
-    <div>TiposEquipos</div>
+    <ContainerPage titulo={'Tipos'}>
+
+    </ContainerPage>
   );
 }
 

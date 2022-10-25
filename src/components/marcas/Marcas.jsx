@@ -1,8 +1,11 @@
 import React from 'react';
+import ContainerPage from '../ui/ContainerPage';
 
 const Marcas = () => {
   return (
-    <div>Marcas</div>
+    <ContainerPage titulo={'Marcas'}>
+
+    </ContainerPage>
   );
 }
 

@@ -1,12 +1,12 @@
 import React from 'react';
+import ContainerPage from '../ui/ContainerPage';
 
 const Usuarios = () => {
 
   return (
-    <>
-      <h1>Usuarios</h1>
-      
-    </>
+    <ContainerPage titulo={'Usuarios'}>
+
+    </ContainerPage>
   );
 }
 
