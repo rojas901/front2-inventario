@@ -10,7 +10,7 @@ const Header = () => {
             to="/"
             className="navbar-brand fs-3 fw-bold text-danger"
           >
-            IUD
+            <img src="https://instructure-uploads.s3.amazonaws.com/account_129840000000000001/attachments/8311/LogoPEQ-100.png" alt="IUD" width='50rem'/>
           </Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
