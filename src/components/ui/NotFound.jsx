@@ -10,7 +10,7 @@ const NotFound = () => {
         <img
           alt='No encontrado'
           src={notFound}
-          height='474rem'
+          height='464rem'
         />
       </div>
     </ContainerPage>

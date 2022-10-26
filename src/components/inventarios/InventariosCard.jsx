@@ -44,8 +44,8 @@ const InventariosCard = ({inventarios}) => {
                       <strong>Tipo: </strong>{inventario.tipo.nombre}
                     </li>
                     <li className="d-flex justify-content-around mt-2">
-                      <button className='rounded-pill'>Editar</button>
-                      <button className='rounded-pill'>Borrar</button>
+                      <button className='rounded-pill btn btn-light'>Editar</button>
+                      <button className='rounded-pill btn btn-light'>Borrar</button>
                     </li>
                   </ul>
                 </div>

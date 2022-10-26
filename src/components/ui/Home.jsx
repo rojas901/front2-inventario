@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <ContainerPage titulo={'Bienvenido'}>
       <div className='d-flex flex-column align-items-center'>
-        <img src={inventarioImage} alt="imagen inventario" className='p-3' height='479rem'/>
+        <img src={inventarioImage} alt="imagen inventario" className='p-3' height='470rem'/>
         <p className='fs-4 text-center'>En este sitio podrás tener acceso a todo lo relacionado con el inventario de la institución, tanto para su gestión como visualización.</p>
       </div>
     </ContainerPage>
