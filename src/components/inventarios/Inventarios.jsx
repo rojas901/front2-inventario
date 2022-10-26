@@ -31,7 +31,12 @@ const Inventarios = () => {
       titulo={'Inventarios'}
       mostrar={mostrar}
       handleClick={handleClick}
-    >      
+    >
+      <div className='d-flex justify-content-center mb-3'>
+        <button className='rounded-pill btn btn-outline-dark'
+        onClick = {handleClick}
+        >{mostrar ? 'Datos':'Nuevo'}</button>
+      </div>      
       {
         mostrar ? 
         <InventarioNew/> 
