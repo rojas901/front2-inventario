@@ -4,7 +4,6 @@ import ContainerPage from '../ui/ContainerPage';
 const Marcas = () => {
   return (
     <ContainerPage titulo={'Marcas'}>
-
     </ContainerPage>
   );
 }

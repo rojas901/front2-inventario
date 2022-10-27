@@ -1,35 +1,150 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import usuarioServices from '../../services/usuarioService';
+import marcaServices from '../../services/marcaService';
+import estadoServices from '../../services/estadoService';
+import tipoServices from '../../services/tipoService';
+import inventarioServices from '../../services/inventarioService';
+
 
 const InventarioNew = () => {
+
+  const [usuarios, setUsuarios] = useState([]);
+  const [marcas, setMarcas] = useState([]);
+  const [estados, setEstados] = useState([]);
+  const [tipos, setTipos] = useState([]);
+  const [inventario, setInventario] = useState({
+    serial: "",
+    modelo: "",
+    descripcion: "",
+    color: "",
+    fotoEquipo: "",
+    fechaCompra: "",
+    precio: "",
+    usuario: "",
+    marca: "",
+    tipo: "",
+    estado: ""
+  });
+
+  const listarUsuarios = async () => {
+    try {
+      const {data} = await usuarioServices.get();
+      console.log(data)
+      setUsuarios(data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const listarMarcas = async () => {
+    try {
+      const {data} = await marcaServices.get();
+      setMarcas(data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const listarEstados = async () => {
+    try {
+      const {data} = await estadoServices.get();
+      setEstados(data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const listarTipos = async () => {
+    try {
+      const {data} = await tipoServices.get();
+      setTipos(data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    listarUsuarios();
+    listarMarcas();
+    listarEstados();
+    listarTipos();
+    // eslint-disable-next-line
+  }, []);
+
+  const handleOnChange = (e) => {
+    setInventario({...inventario, [e.target.name]: e.target.value});
+  }
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    
+    try {
+      const {data} = await inventarioServices.create(inventario);
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
-      <form>
+      <form onSubmit={handleOnSubmit}>
         <div className="row g-3 mb-2">
           <div className="col">
-            <input type="text" className="form-control" placeholder="Serial"
-            name='serial' />
+            <input 
+              type="text" 
+              className="form-control" placeholder="Serial"
+              name='serial'
+              onChange={handleOnChange}
+              value={inventario.serial}
+              required 
+            />
           </div>
           <div className="col">
-            <input type="text" className="form-control" placeholder="Modelo"
-            name='modelo' />
+            <input 
+              type="text" 
+              className="form-control" placeholder="Modelo"
+              name='modelo'
+              onChange={handleOnChange}
+              value={inventario.modelo}
+              required 
+            />
           </div>
         </div>
         <div className="row g-1 mb-2">
-          <textarea
-            className="form-control"
-            rows="2"
-            placeholder="Descripcion"
-            name='descripcion'
-          >
-          </textarea>
+          <div className="col">
+            <input 
+              type="text" 
+              className="form-control" placeholder="Descripcion"
+              name='descripcion'
+              onChange={handleOnChange}
+              value={inventario.descripcion}
+              required 
+            />
+          </div>
         </div>
         <div className="row g-3 mb-2">
           <div className="col">
-            <input type="text" className="form-control" placeholder="Foto de equipo (URL)"
-            name='fotoEquipo' />
+            <input 
+              type="url" 
+              className="form-control" placeholder="Foto de equipo (URL)"
+              name='fotoEquipo'
+              onChange={handleOnChange}
+              value={inventario.fotoEquipo}
+              required 
+            />
           </div>
           <div className="col">
-            <input type="date" className="form-control" name='fechaCompra' />
+            <input 
+              type="text" 
+              className="form-control"
+              placeholder="Fecha compra (aaaa/mm/dd)"
+              name='fechaCompra'
+              onChange={handleOnChange}
+              onFocus={e => e.target.type = 'date'}
+              value={inventario.fechaCompra}
+              required 
+            />
           </div>
         </div>
         <div className="row g-3 mb-2">
@@ -39,56 +154,124 @@ const InventarioNew = () => {
               className="form-control"
               placeholder="Precio"
               name='precio'
+              onChange={handleOnChange}
+              value={inventario.precio}
+              required 
             />
           </div>
           <div className="col">
-            <input type="text" className="form-control" placeholder="Color" 
-            name='color' />
+            <input 
+              type="text" 
+              className="form-control" placeholder="Color"
+              name='color'
+              onChange={handleOnChange}
+              value={inventario.color}
+              required 
+            />
           </div>
         </div>
         <div className="row g-3 mb-2">
           <div className="input-group col">
-            <label className="input-group-text" htmlFor="inputGroupSelect01">Usuario</label>
-            <select className="form-select" id="inputGroupSelect01" name='usuario'>
-              <option selected disabled>Elige un usuario</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+            <label 
+              className="input-group-text" htmlFor="inputGroupSelect01"
+            >
+              Usuario
+            </label>
+            <select 
+              className="form-select" id="inputGroupSelect01" 
+              name='usuario'
+              onChange={handleOnChange}
+              value={inventario.usuario}
+              required 
+            >
+              <option value=''>--Seleccione--</option>
+              {
+                usuarios.map(usuario => {
+                  return <option 
+                  key={usuario._id} 
+                  value={usuario._id}>{usuario.nombre}</option>
+                })
+              }
             </select>
           </div>
           <div className="input-group col">
-            <label className="input-group-text" htmlFor="inputGroupSelect02">Marca</label>
-            <select className="form-select" id="inputGroupSelect02" name='marca'>
-              <option selected disabled>Elige una marca</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+            <label 
+              className="input-group-text" htmlFor="inputGroupSelect02"
+            >
+              Marca
+            </label>
+            <select 
+              className="form-select" id="inputGroupSelect02" 
+              name='marca'
+              onChange={handleOnChange}
+              value={inventario.marca}
+              required 
+            >
+              <option value=''>--Seleccione--</option>
+                {
+                  marcas.map(marca => {
+                    return <option 
+                    key={marca._id} 
+                    value={marca._id}>{marca.nombre}</option>
+                  })
+                }
             </select>
-          </div>          
+          </div>
         </div>
         <div className="row g-3 mb-3">
           <div className="input-group col">
-            <label className="input-group-text" htmlFor="inputGroupSelect03">Estado</label>
-            <select className="form-select" id="inputGroupSelect03" name='estado'>
-              <option selected disabled>Elige un estado</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+            <label 
+              className="input-group-text" htmlFor="inputGroupSelect03"
+            >
+              Estado
+            </label>
+            <select 
+              className="form-select" id="inputGroupSelect03" 
+              name='estado'
+              onChange={handleOnChange}
+              value={inventario.estado}
+              required 
+            >
+              <option value=''>--Seleccione--</option>
+                {
+                  estados.map(estado => {
+                    return <option 
+                    key={estado._id} 
+                    value={estado._id}>{estado.nombre}</option>
+                  })
+                }
             </select>
           </div>
           <div className="input-group col">
-            <label className="input-group-text" htmlFor="inputGroupSelect04">Tipo</label>
-            <select className="form-select" id="inputGroupSelect04" name='tipo'>
-              <option selected disabled>Elige un tipo</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+            <label 
+              className="input-group-text" htmlFor="inputGroupSelect04"
+            >
+              Tipo
+            </label>
+            <select 
+              className="form-select" id="inputGroupSelect04" 
+              name='tipo'
+              onChange={handleOnChange}
+              value={inventario.tipo}
+              required 
+            >
+            <option value=''>--Seleccione--</option>
+              {
+                tipos.map(tipo => {
+                  return <option 
+                  key={tipo._id} 
+                  value={tipo._id}>{tipo.nombre}</option>
+                })
+              }
             </select>
-          </div>          
+          </div>
         </div>
         <div className='d-flex justify-content-center'>
-          <button className='rounded-pill btn btn-outline-dark'
-          >Enviar</button>
+          <button 
+            className='rounded-pill btn btn-outline-dark'
+          >
+            Enviar
+          </button>
         </div>
       </form>
     </>
