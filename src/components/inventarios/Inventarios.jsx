@@ -16,11 +16,11 @@ const Inventarios = () => {
     } catch (error) {
       console.log(error)
     }
-  }
+  }  
 
   useEffect(() => {
     listarInventarios();
-  }, []);
+  }, [mostrar]);
 
   const handleClick = () => {
     setMostrar(!mostrar);
@@ -39,7 +39,7 @@ const Inventarios = () => {
       </div>      
       {
         mostrar ? 
-        <InventarioNew/> 
+        <InventarioNew mostrar={handleClick}/> 
         :
         <InventariosCard inventarios={inventarios}/>
       }      

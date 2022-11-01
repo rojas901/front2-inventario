@@ -4,9 +4,9 @@ import marcaServices from '../../services/marcaService';
 import estadoServices from '../../services/estadoService';
 import tipoServices from '../../services/tipoService';
 import inventarioServices from '../../services/inventarioService';
+import Swal from 'sweetalert2';
 
-
-const InventarioNew = () => {
+const InventarioNew = ({mostrar}) => {
 
   const [usuarios, setUsuarios] = useState([]);
   const [marcas, setMarcas] = useState([]);
@@ -79,10 +79,18 @@ const InventarioNew = () => {
     e.preventDefault();
     
     try {
+      Swal.fire({
+        allowOutsideClick: false,
+        text: 'Cargando...'
+      });
+      Swal.showLoading();
       const {data} = await inventarioServices.create(inventario);
       console.log(data)
+      Swal.close();
+      mostrar();
     } catch (error) {
       console.log(error)
+      Swal.close()
     }
   }
 

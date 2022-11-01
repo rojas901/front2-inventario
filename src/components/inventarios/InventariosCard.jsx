@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const InventariosCard = ({inventarios}) => {
+const InventariosCard = ({ inventarios}) => {
+
   return (
     <div className="row row-cols-1 row-cols-md-3 g-4 mb-4">
-      {
+      {        
         inventarios.map((inventario) => {
           return (
             <div className="col" key={inventario._id}>
@@ -44,7 +46,12 @@ const InventariosCard = ({inventarios}) => {
                       <strong>Tipo: </strong>{inventario.tipo.nombre}
                     </li>
                     <li className="d-flex justify-content-around mt-2">
-                      <button className='rounded-pill btn btn-light'>Editar</button>
+                      <Link to={`${inventario._id}`}>
+                      <button
+                        className='rounded-pill btn btn-light'
+                      >Editar
+                      </button>
+                      </Link>
                       <button className='rounded-pill btn btn-light'>Borrar</button>
                     </li>
                   </ul>

@@ -7,6 +7,7 @@ import Marcas from '../marcas/Marcas';
 import Usuarios from '../usuarios/Usuarios';
 import Inventarios from '../inventarios/Inventarios';
 import NotFound from './NotFound';
+import InventarioEdit from '../inventarios/InventarioEdit';
 
 const MyRouter = () => {
   return (
@@ -18,6 +19,7 @@ const MyRouter = () => {
         <Route path='/marcas' element={<Marcas />} />
         <Route path='/usuarios' element={<Usuarios />} />
         <Route path='/inventarios' element={<Inventarios />} />
+        <Route path='/inventarios/:id' element={<InventarioEdit />}/>
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>
