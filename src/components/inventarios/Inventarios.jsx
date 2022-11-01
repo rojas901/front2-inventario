@@ -41,7 +41,7 @@ const Inventarios = () => {
         mostrar ? 
         <InventarioNew mostrar={handleClick}/> 
         :
-        <InventariosCard inventarios={inventarios}/>
+        <InventariosCard inventarios={inventarios} listar={listarInventarios}/>
       }      
     </ContainerPage>      
   );
