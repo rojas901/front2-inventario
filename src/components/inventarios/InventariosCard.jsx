@@ -6,24 +6,28 @@ import Swal from 'sweetalert2';
 const InventariosCard = ({ inventarios, listar}) => {
 
   const eliminarInventario = async (id) => {
-    await inventarioServices.delete(id);
+    try {
+      await inventarioServices.delete(id);
+    } catch (error) {
+      console.log(error);
+    }    
   }
 
   const handleOnClick = (id) => {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Estas seguro?',
+      text: "Esta operacion no sera reversible!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Si, borrar!'
     }).then((result) => {
       if (result.isConfirmed) {
         eliminarInventario(id);
         Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
+          'Borrado!',
+          'Tu archivo ha sido borrado.',
           'success'
         );
         listar();
