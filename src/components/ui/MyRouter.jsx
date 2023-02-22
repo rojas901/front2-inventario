@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './Home';
 import TiposEquipos from '../tipos/TiposEquipos';
 import Estados from '../estados/Estados';
 import Marcas from '../marcas/Marcas';
@@ -8,6 +7,8 @@ import Usuarios from '../usuarios/Usuarios';
 import Inventarios from '../inventarios/Inventarios';
 import NotFound from './NotFound';
 import InventarioEdit from '../inventarios/InventarioEdit';
+import Home from './Home';
+
 
 const MyRouter = () => {
   return (

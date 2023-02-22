@@ -2,32 +2,16 @@ import axiosInstance from "../helpers/axios-config"
 
 const tipoServices = {
   get: () => {
-    return axiosInstance.get('tipoequipos', {
-        headers: {
-            'Content-type': 'application/json'
-        }
-    })
+    return axiosInstance.get('tipoequipos')
   },
   create: (data) => {
-    return axiosInstance.post('tipoequipos', data, {
-        headers: {
-            'Content-type': 'application/json'
-        }
-    })
+    return axiosInstance.post('tipoequipos', data)
   },
   update: (id, data) => {
-    return axiosInstance.put(`tipoequipos/${id}`, data, {
-        headers: {
-            'Content-type': 'application/json'
-        }
-    })
+    return axiosInstance.put(`tipoequipos/${id}`, data)
   },
   delete: (id) => {
-    return axiosInstance.delete(`tipoequipos/${id}`, {
-        headers: {
-            'Content-type': 'application/json'
-        }
-    })
+    return axiosInstance.delete(`tipoequipos/${id}`)
   }
 }
 

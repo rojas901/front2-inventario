@@ -2,39 +2,19 @@ import axiosInstance from "../helpers/axios-config"
 
 const inventarioServices = {
   get: () => {
-    return axiosInstance.get('inventarios', {
-      headers: {
-        'Content-type': 'application/json'
-      }
-    })
+    return axiosInstance.get('inventarios')
   },
   getById: (id) => {
-    return axiosInstance.get(`inventarios/${id}`, {
-      headers: {
-        'Content-type': 'application/json'
-      }
-    })
+    return axiosInstance.get(`inventarios/${id}`)
   },
   create: (data) => {
-    return axiosInstance.post('inventarios', data, {
-      headers: {
-        'Content-type': 'application/json'
-      }
-    })
+    return axiosInstance.post('inventarios', data)
   },
   update: (id, data) => {
-    return axiosInstance.put(`inventarios/${id}`, data, {
-      headers: {
-        'Content-type': 'application/json'
-      }
-    })
+    return axiosInstance.put(`inventarios/${id}`, data)
   },
   delete: (id) => {
-    return axiosInstance.delete(`inventarios/${id}`, {
-      headers: {
-        'Content-type': 'application/json'
-      }
-    })
+    return axiosInstance.delete(`inventarios/${id}`)
   }
 }
 

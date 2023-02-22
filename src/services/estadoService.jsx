@@ -2,32 +2,16 @@ import axiosInstance from "../helpers/axios-config"
 
 const estadoServices = {
   get: () => {
-    return axiosInstance.get('estadoequipos', {
-        headers: {
-            'Content-type': 'application/json'
-        }
-    })
+    return axiosInstance.get('estadoequipos')
   },
   create: (data) => {
-    return axiosInstance.post('estadoequipos', data, {
-        headers: {
-            'Content-type': 'application/json'
-        }
-    })
+    return axiosInstance.post('estadoequipos', data)
   },
   update: (id, data) => {
-    return axiosInstance.put(`estadoequipos/${id}`, data, {
-        headers: {
-            'Content-type': 'application/json'
-        }
-    })
+    return axiosInstance.put(`estadoequipos/${id}`, data)
   },
   delete: (id) => {
-    return axiosInstance.delete(`estadoequipos/${id}`, {
-        headers: {
-            'Content-type': 'application/json'
-        }
-    })
+    return axiosInstance.delete(`estadoequipos/${id}`)
   }
 }
 

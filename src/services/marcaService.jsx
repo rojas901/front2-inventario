@@ -2,32 +2,16 @@ import axiosInstance from "../helpers/axios-config"
 
 const marcaServices = {
   get: () => {
-    return axiosInstance.get('marcas', {
-        headers: {
-            'Content-type': 'application/json'
-        }
-    })
+    return axiosInstance.get('marcas')
   },
   create: (data) => {
-    return axiosInstance.post('marcas', data, {
-        headers: {
-            'Content-type': 'application/json'
-        }
-    })
+    return axiosInstance.post('marcas', data)
   },
   update: (id, data) => {
-    return axiosInstance.put(`marcas/${id}`, data, {
-        headers: {
-            'Content-type': 'application/json'
-        }
-    })
+    return axiosInstance.put(`marcas/${id}`, data)
   },
   delete: (id) => {
-    return axiosInstance.delete(`marcas/${id}`, {
-        headers: {
-            'Content-type': 'application/json'
-        }
-    })
+    return axiosInstance.delete(`marcas/${id}`)
   }
 }
 
