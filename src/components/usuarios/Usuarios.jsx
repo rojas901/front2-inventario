@@ -9,7 +9,9 @@ const Usuarios = () => {
   const [usuario, setUsuario] = useState({
     nombre: '',
     email: '',
-    estado: true
+    contrasena: '',
+    estado: true,
+    rol:''
   });
   const [editar, setEditar] = useState(false);
 
@@ -44,7 +46,9 @@ const Usuarios = () => {
       setUsuario({
         nombre:'',
         email:'',
-        estado:''
+        contrasena: '',
+        estado:'',
+        rol:''
       })
     } catch (error) {
       console.log(error)
@@ -54,6 +58,8 @@ const Usuarios = () => {
   const handleOnSubmitEditar = async (e) => {
     e.preventDefault();
     try {
+      delete usuario.contrasena;
+      console.log(usuario)
       await usuarioServices.update(usuario._id, usuario);
       Swal.fire({
         icon: 'success',
@@ -106,7 +112,9 @@ const Usuarios = () => {
       setUsuario({
         nombre: '',
         email:'',
-        estado: ''
+        contrasena: '',
+        estado: '',
+        rol:''
       })
     }    
   }
@@ -136,6 +144,16 @@ const Usuarios = () => {
               required
             />
           </div>
+          <div className={editar ? "d-none" : "col"}>
+            <input
+              type="password"
+              className="form-control" placeholder="Password"
+              name='contrasena'
+              onChange={handleOnChange}
+              value={usuario.contrasena}
+              required={editar ? false : true}
+            />
+          </div>
           <div className="input-group col">
             <label
               className="input-group-text" htmlFor="inputGroupSelect01"
@@ -152,6 +170,24 @@ const Usuarios = () => {
               <option value=''>--Seleccione--</option>
               <option value={true}>Activo</option>
               <option value={false}>Inactivo</option>
+            </select>
+          </div>
+          <div className="input-group col">
+            <label
+              className="input-group-text" htmlFor="inputGroupSelect02"
+            >
+              Rol
+            </label>
+            <select
+              className="form-select" id="inputGroupSelect02"
+              name='rol'
+              onChange={handleOnChange}
+              value={usuario.rol}
+              required
+            >
+              <option value='' disabled>--Seleccione--</option>
+              <option value={'Docente'}>Docente</option>
+              <option value={'Administrador'}>Administrador</option>
             </select>
           </div>
           <div className='col d-flex justify-content-center'>
@@ -171,6 +207,7 @@ const Usuarios = () => {
             <th scope="col" className='text-center'>Nombre</th>
             <th scope="col" className='text-center'>Email</th>
             <th scope="col" className='text-center'>Estado</th>
+            <th scope="col" className='text-center'>Rol</th>
             <th scope="col" className='text-center'>Fecha creación</th>
             <th scope="col" className='text-center'>Fecha actualización</th>
             <th scope="col" className='text-center'>Acciones</th>
@@ -185,6 +222,7 @@ const Usuarios = () => {
                   <td className='text-center'>{usuario.nombre}</td>
                   <td className='text-center'>{usuario.email}</td>
                   <td className='text-center'>{usuario.estado === true ? 'Activo' : 'Inactivo'}</td>
+                  <td className='text-center'>{usuario.rol}</td>
                   <td className='text-center'>{usuario.fechaCreacion.slice(0, 10)}</td>
                   <td className='text-center'>{usuario.fechaActualizacion.slice(0, 10)}</td>
                   <td className="d-flex justify-content-around">

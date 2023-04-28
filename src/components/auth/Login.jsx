@@ -27,7 +27,7 @@ const Login = () => {
       const {data} = await authServices.create(usuario);
       Swal.fire({
         icon: 'success',
-        title: 'Se ha guardado la informacion',
+        title: 'Bienvenido',
         showConfirmButton: false,
         timer: 1500
       });
@@ -40,6 +40,12 @@ const Login = () => {
       navigate(0)
       setUser(data)
     } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: error.response.data.msg,
+        showConfirmButton: false,
+        timer: 1500
+      });
       console.log(error)
     }    
   }
@@ -48,7 +54,7 @@ const Login = () => {
       <form onSubmit={handleOnSubmit} className='d-flex justify-content-around flex-column align-items-center'>
           <div className="col mt-2 w-50">
             <input
-              type="text"
+              type="email"
               className="form-control" placeholder="Email"
               name='email'
               onChange={handleOnChange}
@@ -58,7 +64,7 @@ const Login = () => {
           </div>
           <div className="col mt-2 w-50">
             <input
-              type="text"
+              type="password"
               className="form-control" placeholder="Contraseña"
               name='contrasena'
               onChange={handleOnChange}

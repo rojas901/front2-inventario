@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import inventarioServices from '../../services/inventarioService';
 import Swal from 'sweetalert2';
 
-const InventariosCard = ({ inventarios, listar}) => {
+const InventariosCard = ({ inventarios, listar, user}) => {
 
   const eliminarInventario = async (id) => {
     try {
@@ -77,7 +77,7 @@ const InventariosCard = ({ inventarios, listar}) => {
                     <li>
                       <strong>Tipo: </strong>{inventario.tipo.nombre}
                     </li>
-                    <li className="d-flex justify-content-around mt-2">
+                    <li className={user.rol === 'Docente' ? "d-none" : "d-flex justify-content-around mt-2"}>
                       <Link to={`${inventario._id}`}>
                       <button
                         className='rounded-pill btn btn-light'

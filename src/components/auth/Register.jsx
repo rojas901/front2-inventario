@@ -9,7 +9,7 @@ const Register = () => {
     nombre: '',
     email: '',
     contrasena:'',
-    rol:''
+    // rol:''
   });
 
   const handleOnChange = (e) => {
@@ -30,10 +30,15 @@ const Register = () => {
         nombre:'',
         email:'',
         contrasena:'',
-        rol: ''
+        // rol: ''
       })
     } catch (error) {
-      console.log(error)
+      Swal.fire({
+        icon: 'error',
+        title: error.response.data.msg,
+        showConfirmButton: false,
+        timer: 1500
+      });
     }    
   }
 
@@ -52,7 +57,7 @@ const Register = () => {
           </div>
           <div className="col mt-2 w-50">
             <input
-              type="text"
+              type="email"
               className="form-control" placeholder="Email"
               name='email'
               onChange={handleOnChange}
@@ -62,31 +67,13 @@ const Register = () => {
           </div>
           <div className="col mt-2 w-50">
             <input
-              type="text"
+              type="password"
               className="form-control" placeholder="Contraseña"
               name='contrasena'
               onChange={handleOnChange}
               value={usuario.contrasena}
               required
             />
-          </div>
-          <div className="input-group col w-50 mt-2">
-            <label
-              className="input-group-text" htmlFor="inputGroupSelect01"
-            >
-              Rol
-            </label>
-            <select
-              className="form-select" id="inputGroupSelect01"
-              name='rol'
-              onChange={handleOnChange}
-              value={usuario.rol}
-              required
-            >
-              <option value='' disabled>--Seleccione--</option>
-              <option value={'Docente'}>Docente</option>
-              <option value={'Administrador'}>Administrador</option>
-            </select>
           </div>
           <div className='col d-flex justify-content-center mt-2'>
             <button

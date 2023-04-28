@@ -3,11 +3,13 @@ import inventarioServices from '../../services/inventarioService';
 import InventariosCard from './InventariosCard';
 import ContainerPage from '../ui/ContainerPage';
 import InventarioNew from './InventarioNew';
+import { useUser } from '../../context/UserContext';
 
 const Inventarios = () => {
 
   const [inventarios, setInventarios] = useState([]);
   const [mostrar, setMostrar] = useState(false);
+  const {user} = useUser()
 
   const listarInventarios = async () => {
     try {
@@ -32,7 +34,7 @@ const Inventarios = () => {
       mostrar={mostrar}
       handleClick={handleClick}
     >
-      <div className='d-flex justify-content-center mb-3'>
+      <div className={user.rol === 'Docente' ? "d-none" : 'd-flex justify-content-center mb-3'}>
         <button className='rounded-pill btn btn-outline-dark'
         onClick = {handleClick}
         >{mostrar ? 'Datos':'Nuevo'}</button>
@@ -41,7 +43,7 @@ const Inventarios = () => {
         mostrar ? 
         <InventarioNew mostrar={handleClick}/> 
         :
-        <InventariosCard inventarios={inventarios} listar={listarInventarios}/>
+        <InventariosCard inventarios={inventarios} listar={listarInventarios} user={user}/>
       }      
     </ContainerPage>      
   );
